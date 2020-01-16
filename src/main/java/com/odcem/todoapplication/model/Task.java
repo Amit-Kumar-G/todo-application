@@ -25,8 +25,6 @@ public class Task {
 	// @Temporal(TemporalType.DATE)
 	@NonNull private final Date creationDate;
 	
-	
-	
 	public static enum Status {
 		DONE,
 		PENDING
