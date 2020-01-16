@@ -5,17 +5,23 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.odcem.todoapplication.enums.TaskStatusEnum;
 import com.odcem.todoapplication.model.Task;
+import com.odcem.todoapplication.service.TaskService;
 
 @RestController
 public class TaskController {
-
+	
+	@Autowired
+	private TaskService taskService; 
+	
 	/**
 	 * Gets the task specified by the id path variable
 	 * 
@@ -24,7 +30,7 @@ public class TaskController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/tasks/{id}")
 	public Task getTask (@PathVariable int id) {
-		return new Task(id, "Test", "Test", Task.Status.PENDING, new Date(), new Date());
+		return taskService.getTask(id);
 	}
 	
 	/**
@@ -33,7 +39,7 @@ public class TaskController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/tasks")
 	public List<Task> getAllTasks () {
-		return new ArrayList<Task>();
+		return taskService.getAllTasks();
 	}
 	
 	
@@ -44,8 +50,8 @@ public class TaskController {
 	 *
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/tasks")
-	public void addTask (@RequestBody Map<String, String> body) {
-		new Task(Integer.parseInt(body.get("id")), "Test", "Test", Task.Status.PENDING, new Date(), new Date());
+	public void addTask (@RequestBody Task task) {
+		taskService.addTask(task);
 	}
 	
 	/**
@@ -55,7 +61,7 @@ public class TaskController {
 	 * @param id
 	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/tasks/{id}")
-	public void updateTask (@RequestBody Map<String, String> body, @PathVariable int id) {
-		// Logic to deny changing task date.
+	public void updateTask (@RequestBody Task task, @PathVariable int id) {
+		taskService.updateTask(task);
 	}
 }
