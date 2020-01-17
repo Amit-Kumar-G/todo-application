@@ -50,8 +50,8 @@ public class TaskController {
 	 *
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/tasks")
-	public void addTask (@RequestBody Task task) {
-		taskService.addTask(task);
+	public String addTask (@RequestBody Task task) {
+		return taskService.addTask(task);
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class TaskController {
 	 * @param id
 	 */
 	@RequestMapping(method = RequestMethod.PUT, value = "/tasks/{id}")
-	public void updateTask (@RequestBody Task task, @PathVariable int id) {
-		taskService.updateTask(task);
+	public String updateTask (@RequestBody String jsonRequest, @PathVariable int id) {
+		return taskService.updateTask(jsonRequest, id);
 	}
 }
