@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.odcem.todoapplication.model.Task;
+import com.odcem.todoapplication.entity.Task;
 
 /**
  * Extended repository, can add additional functionality in the future.

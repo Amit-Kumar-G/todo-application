@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.odcem.todoapplication.entity.Task;
 import com.odcem.todoapplication.enums.TaskStatusEnum;
-import com.odcem.todoapplication.model.Task;
 import com.odcem.todoapplication.service.TaskService;
 
 @RestController
@@ -37,6 +38,7 @@ public class TaskController {
 	 * Gets all the tasks
 	 * @return
 	 */
+	@GetMapping
 	@RequestMapping(method = RequestMethod.GET, value = "/tasks")
 	public List<Task> getAllTasks () {
 		return taskService.getAllTasks();

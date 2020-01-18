@@ -1,6 +1,5 @@
 package com.odcem.todoapplication.service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,26 +13,34 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.odcem.todoapplication.enums.TaskStatusEnum;
+import com.odcem.todoapplication.entity.Task;
 import com.odcem.todoapplication.messages.Messages;
-import com.odcem.todoapplication.model.Task;
 import com.odcem.todoapplication.repository.TaskRepository;;
 
 @Service
 public class TaskService {
 	
 	@Autowired
-	TaskRepository taskRepository;
+	private TaskRepository taskRepository;
 	
-	Logger logger = Logger.getLogger(TaskService.class);
+	private static final Logger logger = Logger.getLogger(TaskService.class);
 	
-	public Task getTask(int id) {		
+	public Task getTask(int id) {	
 		
-		logger.info("Trying to get task " + id);
-		Task task = taskRepository.findById(id).orElse(null);
+		logger.info(String.format("Trying to get task {}", id));
+		Task task = null;
+		try {
+			task = taskRepository.findById(id).orElse(null);
+			
+			if (task == null) {
+				logger.error("Could not find task with id " + id);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+		}
 		
-		if (task == null)
-			logger.error("Could not find task with id " + id);
+		
 		
 		logger.info("Found task with id " + id);
 		return task;
@@ -56,7 +63,7 @@ public class TaskService {
 			// Sets the default task status to pending if not specified.
 			if (task.getStatus() == null) {
 				logger.warn("Task satus was empty, adding default value.");
-				task.setStatus(TaskStatusEnum.PENDING);
+				task.setStatus((byte) 0);
 			}
 			
 			taskRepository.save(task);
@@ -110,7 +117,7 @@ public class TaskService {
 		
 		if (!jsonObject.isNull("status")) {
 			
-			task.setStatus(TaskStatusEnum.valueOf(jsonObject.getString("status")));
+			task.setStatus((byte) 0);
 		}
 		
 		if (!jsonObject.isNull("deadline_date")) {
