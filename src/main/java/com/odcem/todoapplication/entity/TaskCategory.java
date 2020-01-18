@@ -35,6 +35,6 @@ public class TaskCategory {
 	/*
 	 * TODO: Ask how to fetch when FetchType is lazy.
 	 */
-	@OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "taskCategory", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Task> tasks;
 }

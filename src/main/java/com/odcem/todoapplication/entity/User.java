@@ -40,6 +40,6 @@ public class User {
 	 * TODO: Ask how to fetch when FetchType is lazy.
 	 * TODO: Ask if cascade is required on mysql tables.
 	 */
-	@OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Task> tasks;
 }

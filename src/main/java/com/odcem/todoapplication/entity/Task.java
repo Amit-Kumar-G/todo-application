@@ -73,6 +73,6 @@ public class Task {
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "category_id_id", referencedColumnName = "id", updatable=false, insertable=false)
+	@JoinColumn(name = "category_id", referencedColumnName = "id", updatable=false, insertable=false)
 	private TaskCategory taskCategory;
 }

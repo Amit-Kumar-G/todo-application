@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.odcem.todoapplication.dtos.UserDto;
 import com.odcem.todoapplication.entity.Task;
 import com.odcem.todoapplication.enums.TaskStatusEnum;
 import com.odcem.todoapplication.service.TaskService;
@@ -54,6 +55,12 @@ public class TaskController {
 	@RequestMapping(method = RequestMethod.POST, value = "/tasks")
 	public String addTask (@RequestBody Task task) {
 		return taskService.addTask(task);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/userTest")
+	public List<Integer> testUser(@RequestBody UserDto user) {
+		
+		return user.getTask_ids();
 	}
 	
 	/**

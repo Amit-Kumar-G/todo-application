@@ -10,7 +10,10 @@ import com.odcem.todoapplication.entity.Task;
 public class TodoApplication {
 
 	public static void main(String[] args) {
+		
+		// For log4j
 		BasicConfigurator.configure();
+		
 		SpringApplication.run(TodoApplication.class, args);
 	}
 }
