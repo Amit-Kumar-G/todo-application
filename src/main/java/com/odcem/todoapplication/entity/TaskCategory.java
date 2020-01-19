@@ -32,12 +32,22 @@ public class TaskCategory {
 	@Column(name = "is_deleted")
 	private Boolean isDeleted;
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@OneToMany(mappedBy = "taskCategory", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Task> tasks;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
+	
+	public TaskCategory() {}
 	
 	public Integer getId() {
 		return id;

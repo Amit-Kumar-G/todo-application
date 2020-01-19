@@ -1,16 +1,19 @@
 package com.odcem.todoapplication.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.odcem.todoapplication.entity.Task;
 import com.odcem.todoapplication.exception.TaskValidationException;
+import com.odcem.todoapplication.json.TaskJson;
 
 @Repository
 public class TaskRepositoryImpl implements TaskRepository {
 
 	@Autowired
-	TaskJpaRepository taskJpaRepository;
+	private TaskJpaRepository taskJpaRepository;
 	
 	@Override
 	public Task save(Task task) {
@@ -36,6 +39,12 @@ public class TaskRepositoryImpl implements TaskRepository {
 			throw new TaskValidationException("The task with id " + id + " requested could not be found.");
 		}
 		return task;
+	}
+
+	@Override
+	public List<Task> findAll() {
+		
+		return taskJpaRepository.findAll();
 	}
 
 }

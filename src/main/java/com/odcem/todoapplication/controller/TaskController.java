@@ -11,14 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.odcem.todoapplication.dtos.TaskDto;
-import com.odcem.todoapplication.entity.Task;
 import com.odcem.todoapplication.json.TaskJson;
 import com.odcem.todoapplication.service.TaskService;
-import com.odcem.todoapplication.service.TaskServiceImpl;
 
 @RestController
 public class TaskController {
@@ -34,11 +30,10 @@ public class TaskController {
 	/**
 	 * @return List of tasks
 	 */
-//	@GetMapping
-//	@RequestMapping(value = "/tasks")
-//	public List<Task> getAllTasks () {
-//		return taskService.getAllTasks();
-//	}
+	@GetMapping(value = "/tasks")
+	public List<TaskJson> getAllTasks () {
+		return taskService.getAllTasks();
+	}
 	
 	/**
 	 * @param body
@@ -55,13 +50,14 @@ public class TaskController {
 	 * @param body
 	 * @param id
 	 */
-//	@PutMapping(value = "/tasks/{id}")
-//	public String updateTask (@RequestBody String jsonRequest, @PathVariable int id) {
-//		return taskService.updateTask(jsonRequest, id);
-//	}
-//	
-//	@DeleteMapping(value = "/tasks/{id}")
-//	public String deleteTask (@PathVariable int id) {
-//		return taskService.deleteTask(id);
-//	}
+	@PutMapping(value = "/tasks/{id}")
+	public ResponseEntity<TaskJson> updateTask (@RequestBody TaskJson taskJson, @PathVariable int id) {
+		TaskJson taskJsonResponse = taskService.updateTask(taskJson, id);
+		return  new ResponseEntity<TaskJson>(taskJsonResponse, HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value = "/tasks/{id}")
+	public TaskJson deleteTask (@PathVariable Integer id) {
+		return taskService.deleteTask(id);
+	}
 }

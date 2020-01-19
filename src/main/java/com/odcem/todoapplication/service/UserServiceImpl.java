@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
 		// Fetching the tasks of the user.
 		
 		return userBuilder.buildJsonFromUser(user);
+		
 
 	}
 

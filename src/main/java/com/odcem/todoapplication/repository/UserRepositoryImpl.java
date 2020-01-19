@@ -12,7 +12,7 @@ import com.odcem.todoapplication.exception.UserValidationException;
 public class UserRepositoryImpl implements UserRepository {
 	
 	@Autowired
-	UserJpaRepository userJpaRepository;
+	private UserJpaRepository userJpaRepository;
 
 	@Override
 	public User saveNewUser(User user) {

@@ -8,26 +8,28 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.odcem.todoapplication.controller.TaskCategoryServiceImpl;
+import com.odcem.todoapplication.entity.TaskCategory;
 import com.odcem.todoapplication.exception.TaskValidationException;
 import com.odcem.todoapplication.exception.UserValidationException;
 import com.odcem.todoapplication.json.ErrorDetial;
 import com.odcem.todoapplication.service.TaskServiceImpl;
 import com.odcem.todoapplication.service.UserServiceImpl;
 import com.odcem.todoapplication.utility.Utils;
+import com.odcem.todoapplication.validation.TaskCategoryValidationException;
 
 @ControllerAdvice(basePackages = {"com.odcem.todoapplication.controller"})
 public class ApplicationExceptionHandler {
 	
 	private Logger strategyLogger;
-	
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
+
 	@ExceptionHandler(value = TaskValidationException.class)
-	public ErrorDetial taskDtoValidationException(TaskValidationException e) {
+	public ResponseEntity<ErrorDetial> taskDtoValidationException(TaskValidationException e) {
 		
 		strategyLogger = LogManager.getLogger(TaskServiceImpl.class);
 		strategyLogger.fatal("The task could not be understood, bad format.");
 		strategyLogger.fatal(Utils.getStackTraceInStringFmt(e));
-		return new ErrorDetial("TA_100-01", e.getMessage());
+		return new ResponseEntity<ErrorDetial>( new ErrorDetial("TA_100-01", e.getMessage()), HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(value = UserValidationException.class)
@@ -36,8 +38,16 @@ public class ApplicationExceptionHandler {
 		strategyLogger = LogManager.getLogger(UserServiceImpl.class);
 		strategyLogger.fatal("Bad user request format.");
 		strategyLogger.fatal(Utils.getStackTraceInStringFmt(e));
-		//return new ErrorDetial("US_100-01", e.getMessage());
 		return new ResponseEntity<ErrorDetial>( new ErrorDetial("US_100-01", e.getMessage()), HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(value = TaskCategoryValidationException.class)
+	public ResponseEntity<ErrorDetial> handleTaskCategoryValidationException(TaskCategoryValidationException e) {
+		
+		strategyLogger = LogManager.getLogger(TaskCategoryServiceImpl.class);
+		strategyLogger.fatal("Bad task category request format.");
+		strategyLogger.fatal(Utils.getStackTraceInStringFmt(e));
+		return new ResponseEntity<ErrorDetial>( new ErrorDetial("TC_100-01", e.getMessage()), HttpStatus.BAD_REQUEST);
 	}
 	
 }

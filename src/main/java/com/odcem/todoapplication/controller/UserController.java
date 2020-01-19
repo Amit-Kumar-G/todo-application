@@ -18,7 +18,7 @@ import com.odcem.todoapplication.service.UserService;
 public class UserController {
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	@PostMapping(value = "/users")
 	public ResponseEntity<UserJson> addUser (@RequestBody UserJson userJson) {
@@ -34,18 +34,16 @@ public class UserController {
 	
 	/*
 	 * TODO
-	 */
 	@GetMapping(value = "/users/{id}/details")
 	public ResponseEntity<UserJson> getUserDetails (@PathVariable Integer id) {
 		UserJson responseJson = userService.getUserDetails(id);
 		return new ResponseEntity<UserJson>(responseJson, HttpStatus.OK);
 	}
+	*/
 	
 	@GetMapping(value = "/users")
 	public ResponseEntity<List<UserJson>> getAllUser () {		
 		List<UserJson> users = userService.getAllUsers();
 		return new ResponseEntity<List<UserJson>>(users, HttpStatus.OK);
 	}
-	
-	
 }

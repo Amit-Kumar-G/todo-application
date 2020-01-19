@@ -4,9 +4,9 @@ import lombok.Getter;
 
 public enum TaskStatusEnum {
 
-	DONE((byte) 0, "done"),
-	IN_PROGRESS((byte) 1, "in_progress"),
-	PENDING((byte) 2, "pending");
+	DONE((byte) 0, "DONE"),
+	IN_PROGRESS((byte) 1, "IN_PROGRESS"),
+	PENDING((byte) 2, "PENDING");
 
 	@Getter
 	private byte id;
@@ -52,6 +52,7 @@ public enum TaskStatusEnum {
 	public static Byte getTaskStatusByteFromString(String value) {
 		
 		for (TaskStatusEnum e : TaskStatusEnum.values()) {
+			System.out.println(e.value);
 			if (e.getValue().equals(value)) {
 				return e.getId();
 			}

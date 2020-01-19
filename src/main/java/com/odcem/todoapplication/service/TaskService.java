@@ -9,11 +9,11 @@ public interface TaskService {
 	
 	public TaskJson getTask(Integer id);
 	
-	public List<TaskDto> getAllTasks ();
+	public List<TaskJson> getAllTasks ();
 	
 	public TaskJson addTask (TaskJson task);
 	
-	public TaskDto updateTask (TaskDto taskDto, int id);
+	public TaskJson updateTask (TaskJson taskJson, int id);
 	
-	public TaskDto deleteTask(int id);
+	public TaskJson deleteTask(Integer id);
 }

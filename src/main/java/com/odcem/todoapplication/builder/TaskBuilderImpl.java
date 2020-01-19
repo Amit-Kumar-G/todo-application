@@ -8,31 +8,33 @@ import org.springframework.stereotype.Service;
 import com.odcem.todoapplication.dtos.TaskDto;
 import com.odcem.todoapplication.entity.Task;
 import com.odcem.todoapplication.entity.TaskCategory;
-import com.odcem.todoapplication.entity.User;
 import com.odcem.todoapplication.enums.TaskStatusEnum;
 import com.odcem.todoapplication.json.TaskJson;
 import com.odcem.todoapplication.repository.TaskCategoryJpaRepository;
-import com.odcem.todoapplication.repository.UserJpaRepository;
 import com.odcem.todoapplication.repository.UserRepository;
+
+/**
+ * 
+ * @author amitkumargupta
+ *
+ */
 
 @Service
 public class TaskBuilderImpl implements TaskBuilder{
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 	
 	@Autowired
-	TaskCategoryJpaRepository taskCategoryRepository;
+	private TaskCategoryJpaRepository taskCategoryRepository;
 	
 	/**
 	 * @see <b>When converting from Json to Task entity, the is deleted option is set to false by default.</b>
 	 */
 	@Override
-	public Task buildNewTaskfromJson(TaskJson taskJson) {
+	public Task buildNewTaskfromJson(final TaskJson taskJson) {
 		
-		/*
-		 * TODO: Learn and use configurable mapper here
-		 */
+		// TODO: Learn and use configurable mapper here
 		Date deadLineDate = null;
 		if (!(taskJson.getDeadlineEpochDate() == null)) {
 			if (! (taskJson.getDeadlineEpochDate().trim().isEmpty())) {
@@ -40,10 +42,9 @@ public class TaskBuilderImpl implements TaskBuilder{
 			}
 		}
 		
-		TaskCategory catId = null;
-
+		TaskCategory taskCat = null;
 		if (taskJson.getCategoryId() != null) {
-			catId = taskCategoryRepository.getOne(taskJson.getCategoryId());
+			taskCat = taskCategoryRepository.getOne(taskJson.getCategoryId());
 		}
 		
 		Task task = new Task(
@@ -54,19 +55,14 @@ public class TaskBuilderImpl implements TaskBuilder{
 				new Date(Long.parseLong(taskJson.getCreatedEpochDate())),				
 				false,
 				userRepository.getUserById(taskJson.getUserId()),
-				catId
+				taskCat
 				);
-		
-		
-		// Fetching user and task category form the database
-		//task.setUser();
-
-		
+				
 		return task;
 	}
 
 	@Override
-	public TaskDto buildTaskDtoFromTask(Task task) {
+	public TaskDto buildTaskDtoFromTask(final Task task) {
 
 		TaskDto taskDto = new TaskDto();
 		taskDto.setId(task.getId());
@@ -90,7 +86,7 @@ public class TaskBuilderImpl implements TaskBuilder{
 	}
 
 	@Override
-	public TaskJson buildTaskJsonFromTask(Task task) {
+	public TaskJson buildTaskJsonFromTask(final Task task) {
 		
 		TaskJson taskJson = new TaskJson();
 		taskJson.setId(task.getId());		
@@ -114,6 +110,27 @@ public class TaskBuilderImpl implements TaskBuilder{
 				taskJson.setCategoryId(task.getTaskCategory().getId());
 		
 		return taskJson;
+	}
+
+	@Override
+	public Task updateTaskFromJson(final TaskJson taskJson, final Task task) {
+		
+		if (taskJson.getTitle() != null) {
+			task.setTitle(taskJson.getTitle());
+		}
+		
+		if (taskJson.getDescription() != null) {			
+			task.setDescription(taskJson.getDescription());
+		}
+		
+		if (taskJson.getStatus() != null) {			
+			task.setStatus(TaskStatusEnum.getTaskStatusByteFromString(taskJson.getStatus()));
+		}
+		
+		if (taskJson.getDeadlineEpochDate() != null) {			
+			task.setDeadlineDate(new Date(Long.parseLong(taskJson.getCreatedEpochDate())));
+		}
+		return task;
 	}
 	
 	

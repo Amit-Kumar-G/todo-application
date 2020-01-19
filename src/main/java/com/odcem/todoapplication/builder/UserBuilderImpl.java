@@ -15,11 +15,17 @@ import com.odcem.todoapplication.json.TaskJson;
 import com.odcem.todoapplication.json.UserJson;
 import com.odcem.todoapplication.validation.UserValidation;
 
+/**
+ * 
+ * @author amitkumargupta
+ *
+ */
+
 @Service
 public class UserBuilderImpl implements UserBuilder {
 
 	@Autowired
-	TaskBuilder taskBuilder;
+	private TaskBuilder taskBuilder;
 	
 	@Override
 	public User buildNewUserFromJson(UserJson userJson) {

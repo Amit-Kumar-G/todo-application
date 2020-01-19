@@ -1,10 +1,14 @@
 package com.odcem.todoapplication.builder;
 
-import org.springframework.stereotype.Service;
-
 import com.odcem.todoapplication.dtos.UserDto;
 import com.odcem.todoapplication.entity.User;
 import com.odcem.todoapplication.json.UserJson;
+
+/**
+ * 
+ * @author amitkumargupta
+ *
+ */
 
 public interface UserBuilder {
 	
