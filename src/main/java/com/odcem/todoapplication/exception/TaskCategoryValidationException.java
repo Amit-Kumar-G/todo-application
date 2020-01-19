@@ -1,6 +1,4 @@
-package com.odcem.todoapplication.validation;
-
-import com.odcem.todoapplication.exception.ApplicationException;
+package com.odcem.todoapplication.exception;
 
 public class TaskCategoryValidationException extends ApplicationException {
 

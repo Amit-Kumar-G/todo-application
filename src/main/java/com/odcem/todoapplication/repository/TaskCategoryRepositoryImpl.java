@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.odcem.todoapplication.entity.TaskCategory;
-import com.odcem.todoapplication.validation.TaskCategoryValidationException;
+import com.odcem.todoapplication.exception.TaskCategoryValidationException;
 
 @Repository
 public class TaskCategoryRepositoryImpl implements TaskCategoryRepository {
