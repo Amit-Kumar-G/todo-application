@@ -1,4 +1,4 @@
-package com.odcem.todoapplication.controller;
+package com.odcem.todoapplication.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,6 @@ import com.odcem.todoapplication.builder.TaskCategoryBuilder;
 import com.odcem.todoapplication.entity.TaskCategory;
 import com.odcem.todoapplication.json.TaskCategoryJson;
 import com.odcem.todoapplication.repository.TaskCategoryRepository;
-import com.odcem.todoapplication.service.TaskCategoryService;
 import com.odcem.todoapplication.validation.TaskCategoryValidation;
 
 /**

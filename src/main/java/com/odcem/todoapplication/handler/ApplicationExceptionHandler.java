@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.odcem.todoapplication.controller.TaskCategoryServiceImpl;
 import com.odcem.todoapplication.entity.TaskCategory;
 import com.odcem.todoapplication.exception.TaskCategoryValidationException;
 import com.odcem.todoapplication.exception.TaskValidationException;
 import com.odcem.todoapplication.exception.UserValidationException;
 import com.odcem.todoapplication.json.ErrorDetial;
+import com.odcem.todoapplication.service.TaskCategoryServiceImpl;
 import com.odcem.todoapplication.service.TaskServiceImpl;
 import com.odcem.todoapplication.service.UserServiceImpl;
 import com.odcem.todoapplication.utility.Utils;
