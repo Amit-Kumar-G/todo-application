@@ -76,6 +76,17 @@ public class UserServiceImpl implements UserService {
 		
 		return null;
 	}
+
+	@Override
+	public List<UserJson> getAllUsersByName(String name) {
+		
+		List<User> users = userRepository.getUsersByName(name);
+		List<UserJson> userJsons = new ArrayList<>();
+		for (User u : users) {
+			userJsons.add(userBuilder.buildJsonFromUser(u));
+		}
+		return userJsons;
+	}
 	
 
 }

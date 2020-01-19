@@ -45,4 +45,10 @@ public class UserRepositoryImpl implements UserRepository {
 		List<User> users = userJpaRepository.findAll();
 		return users;
 	}
+
+	@Override
+	public List<User> getUsersByName(String name) {
+		List<User> users = userJpaRepository.findUserByName(name);
+		return users;
+	}
 }

@@ -11,4 +11,6 @@ public interface UserRepository {
 	public User getUserById (Integer id);
 	
 	public List<User> getAllUsers();
+	
+	public List<User> getUsersByName (String name);
 }

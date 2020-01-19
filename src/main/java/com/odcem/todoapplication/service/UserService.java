@@ -12,6 +12,8 @@ public interface UserService {
 	
 	public List<UserJson> getAllUsers ();
 	
+	public List<UserJson> getAllUsersByName (String name);
+	
 	public UserJson addUser (UserJson userJson);
 	
 	public UserDto updateUser (UserJson userJson, int id);

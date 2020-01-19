@@ -46,4 +46,10 @@ public class UserController {
 		List<UserJson> users = userService.getAllUsers();
 		return new ResponseEntity<List<UserJson>>(users, HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/users/find/{name}")
+	public ResponseEntity<List<UserJson>> getAllUsersByName (@PathVariable String name) {		
+		List<UserJson> users = userService.getAllUsersByName(name);
+		return new ResponseEntity<List<UserJson>>(users, HttpStatus.OK);
+	}
 }
