@@ -1,10 +1,8 @@
 package com.odcem.todoapplication;
 
-import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.odcem.todoapplication.entity.Task;
 
 @SpringBootApplication
 public class TodoApplication {
@@ -12,7 +10,7 @@ public class TodoApplication {
 	public static void main(String[] args) {
 		
 		// For log4j
-		BasicConfigurator.configure();
+		PropertyConfigurator.configure("./src/main/resources/log4j.properties");
 		
 		SpringApplication.run(TodoApplication.class, args);
 	}

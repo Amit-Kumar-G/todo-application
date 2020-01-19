@@ -1,22 +1,24 @@
 package com.odcem.todoapplication.controller;
 
 import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.odcem.todoapplication.dtos.UserDto;
+import com.odcem.todoapplication.dtos.TaskDto;
 import com.odcem.todoapplication.entity.Task;
-import com.odcem.todoapplication.enums.TaskStatusEnum;
+import com.odcem.todoapplication.json.TaskJson;
 import com.odcem.todoapplication.service.TaskService;
+import com.odcem.todoapplication.service.TaskServiceImpl;
 
 @RestController
 public class TaskController {
@@ -24,43 +26,27 @@ public class TaskController {
 	@Autowired
 	private TaskService taskService; 
 	
-	/**
-	 * Gets the task specified by the id path variable
-	 * 
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/tasks/{id}")
-	public Task getTask (@PathVariable int id) {
+	@GetMapping(value = "/tasks/{id}")
+	public TaskJson getTask (@PathVariable int id) {
 		return taskService.getTask(id);
 	}
 	
 	/**
-	 * Gets all the tasks
-	 * @return
+	 * @return List of tasks
 	 */
-	@GetMapping
-	@RequestMapping(method = RequestMethod.GET, value = "/tasks")
-	public List<Task> getAllTasks () {
-		return taskService.getAllTasks();
-	}
-	
+//	@GetMapping
+//	@RequestMapping(value = "/tasks")
+//	public List<Task> getAllTasks () {
+//		return taskService.getAllTasks();
+//	}
 	
 	/**
-	 * Adds a new task as per the request body.
-	 * Request body is a map of String, String.
 	 * @param body
-	 *
 	 */
-	@RequestMapping(method = RequestMethod.POST, value = "/tasks")
-	public String addTask (@RequestBody Task task) {
-		return taskService.addTask(task);
-	}
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/userTest")
-	public List<Integer> testUser(@RequestBody UserDto user) {
-		
-		return user.getTask_ids();
+	@PostMapping(value = "/tasks")
+	public ResponseEntity<TaskJson> addTask (@RequestBody TaskJson taskJson) {	
+		TaskJson taskJsonResponse = taskService.addTask(taskJson);
+		return new ResponseEntity<TaskJson>(taskJsonResponse, HttpStatus.OK);
 	}
 	
 	/**
@@ -69,8 +55,13 @@ public class TaskController {
 	 * @param body
 	 * @param id
 	 */
-	@RequestMapping(method = RequestMethod.PUT, value = "/tasks/{id}")
-	public String updateTask (@RequestBody String jsonRequest, @PathVariable int id) {
-		return taskService.updateTask(jsonRequest, id);
-	}
+//	@PutMapping(value = "/tasks/{id}")
+//	public String updateTask (@RequestBody String jsonRequest, @PathVariable int id) {
+//		return taskService.updateTask(jsonRequest, id);
+//	}
+//	
+//	@DeleteMapping(value = "/tasks/{id}")
+//	public String deleteTask (@PathVariable int id) {
+//		return taskService.deleteTask(id);
+//	}
 }

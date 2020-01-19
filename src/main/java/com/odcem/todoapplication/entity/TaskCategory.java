@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,24 +19,57 @@ import lombok.NonNull;
 
 @Entity
 @Table(name = "task_category")
-@Data
 public class TaskCategory {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	
-	@NonNull
 	@Column(name = "name")
-	private String name;
+	private String name;		
 	
 	@Column(name = "is_deleted")
-	private boolean isDeleted;
+	private Boolean isDeleted;
 	
-	/*
-	 * TODO: Ask how to fetch when FetchType is lazy.
-	 */
 	@OneToMany(mappedBy = "taskCategory", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Task> tasks;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public Set<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
+	}
+	
+	
 }
