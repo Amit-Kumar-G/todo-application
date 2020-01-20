@@ -17,4 +17,6 @@ public interface UserBuilder {
 	public UserDto buildUserDtoFromUser(User user);
 
 	public UserJson buildJsonFromUser(User user);
+
+	public User updateExistingUserFromJson(User user, UserJson userJson);
 }

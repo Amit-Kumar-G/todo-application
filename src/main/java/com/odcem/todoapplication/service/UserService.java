@@ -16,9 +16,11 @@ public interface UserService {
 	
 	public UserJson addUser (UserJson userJson);
 	
-	public UserDto updateUser (UserJson userJson, int id);
+	public UserJson updateUser (UserJson userJson, Integer id);
 	
-	public UserDto deleteUser (int id);
+	public UserJson deleteUser (Integer id);
 
 	public UserJson getUserDetails(Integer id);
+	
+	public void retriveSoftDeletedUserById (Integer id);
 }

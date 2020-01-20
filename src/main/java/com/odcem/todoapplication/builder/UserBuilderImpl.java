@@ -83,4 +83,17 @@ public class UserBuilderImpl implements UserBuilder {
 		return userJson;
 	}
 
+	@Override
+	public User updateExistingUserFromJson(User user, UserJson userJson) {
+		
+		if (userJson.getName() != null) {
+			user.setName(userJson.getName());
+		}
+		
+		if (userJson.getEmail() != null) {
+			user.setEmail(userJson.getEmail());
+		}
+		return user;
+	}
+
 }

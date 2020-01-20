@@ -57,14 +57,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto updateUser(UserJson userJson, int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserJson updateUser(UserJson userJson, Integer id) {
+		
+		User user = userRepository.getUserById(id);
+		user = userBuilder.updateExistingUserFromJson(user, userJson);	
+		user = userRepository.updateUser(user);
+		userJson = userBuilder.buildJsonFromUser(user);
+		return userJson;
 	}
 
 	@Override
-	public UserDto deleteUser(int id) {
-		// TODO Auto-generated method stub
+	public UserJson deleteUser(Integer id) {
+		userRepository.deleteUser(id);
 		return null;
 	}
 
@@ -76,7 +80,7 @@ public class UserServiceImpl implements UserService {
 		
 		return null;
 	}
-
+   
 	@Override
 	public List<UserJson> getAllUsersByName(String name) {
 		
@@ -86,6 +90,12 @@ public class UserServiceImpl implements UserService {
 			userJsons.add(userBuilder.buildJsonFromUser(u));
 		}
 		return userJsons;
+	}
+
+	@Override
+	public void retriveSoftDeletedUserById(Integer id) {
+		
+		userRepository.retriveSoftDeletedUserById(id);
 	}
 	
 

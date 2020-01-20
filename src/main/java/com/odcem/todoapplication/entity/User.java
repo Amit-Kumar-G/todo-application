@@ -36,6 +36,13 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<TaskCategory> taskCategories;
 
+	@Column(name = "email", unique = true)
+	private String email;
+	
+	@Column(name = "is_deleted")
+	private Boolean isDeleted;
+	
+	
 	public Set<TaskCategory> getTaskCategories() {
 		return taskCategories;
 	}
@@ -85,12 +92,7 @@ public class User {
 	}
 
 
-	@Column(name = "email", unique = true)
-	private String email;
-	
-	@Column(name = "is_deleted")
-	private Boolean isDeleted;
-	
+
 	/*
 	 * TODO: Ask how to fetch when FetchType is lazy.
 	 * TODO: Ask if cascade is required on mysql tables.

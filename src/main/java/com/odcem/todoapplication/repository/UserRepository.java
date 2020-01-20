@@ -13,4 +13,10 @@ public interface UserRepository {
 	public List<User> getAllUsers();
 	
 	public List<User> getUsersByName (String name);
+
+	public User updateUser(User user);
+
+	public void deleteUser(Integer id);
+	
+	public void retriveSoftDeletedUserById (Integer id);
 }
