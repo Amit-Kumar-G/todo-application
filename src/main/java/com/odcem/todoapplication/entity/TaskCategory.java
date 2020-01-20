@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 import lombok.Data;
 import lombok.NonNull;
 
@@ -32,6 +34,7 @@ public class TaskCategory {
 	@Column(name = "is_deleted")
 	private Boolean isDeleted;
 	
+	@Where(clause = "is_deleted=false")
 	@OneToMany(mappedBy = "taskCategory", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Task> tasks;
 

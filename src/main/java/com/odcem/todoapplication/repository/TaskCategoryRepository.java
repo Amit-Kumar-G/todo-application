@@ -12,4 +12,8 @@ public interface TaskCategoryRepository {
 
 	List<TaskCategory> getAllUsers();
 
+	void deleteTaskCategory(Integer id);
+
+	void retriveSoftDeletedTaskCategoryById(Integer id);
+
 }

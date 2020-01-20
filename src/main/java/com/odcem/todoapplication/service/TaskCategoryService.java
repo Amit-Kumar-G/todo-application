@@ -12,4 +12,8 @@ public interface TaskCategoryService {
 
 	List<TaskCategoryJson> getAllTasks();
 
+	void deleteUser(Integer id);
+
+	void retriveSoftDeletedUserById(Integer id);
+
 }

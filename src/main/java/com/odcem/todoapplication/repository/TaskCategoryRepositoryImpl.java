@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.odcem.todoapplication.entity.TaskCategory;
+import com.odcem.todoapplication.entity.User;
 import com.odcem.todoapplication.exception.TaskCategoryValidationException;
+import com.odcem.todoapplication.exception.UserValidationException;
 
 @Repository
 public class TaskCategoryRepositoryImpl implements TaskCategoryRepository {
 
 	@Autowired
-	private TaskCategoryJpaRepository taskCategoryJpaRepository;
+	private TaskCategoryJpaRepository<TaskCategory, Integer> taskCategoryJpaRepository;
 
 	@Override
 	public TaskCategory addTaskCategory(TaskCategory taskCategory) {
@@ -33,7 +35,7 @@ public class TaskCategoryRepositoryImpl implements TaskCategoryRepository {
 		
 		TaskCategory taskCategory;
 		try {
-			taskCategory = taskCategoryJpaRepository.getOne(id);
+			taskCategory = taskCategoryJpaRepository.findTaskCategoryById(id, false);
 		} catch (Exception e) {
 			throw new TaskCategoryValidationException("The task category with the given id does not exist.");
 		}
@@ -43,5 +45,16 @@ public class TaskCategoryRepositoryImpl implements TaskCategoryRepository {
 	@Override
 	public List<TaskCategory> getAllUsers() {
 		return taskCategoryJpaRepository.findAll();
+	}
+
+	@Override
+	public void deleteTaskCategory(Integer id) {
+		taskCategoryJpaRepository.softDeleteTaskCategoryById(id);
+	}
+
+	@Override
+	public void retriveSoftDeletedTaskCategoryById(Integer id) {
+		taskCategoryJpaRepository.retriveSoftDeletedTaskCategoryById(id);
+		
 	}
 }

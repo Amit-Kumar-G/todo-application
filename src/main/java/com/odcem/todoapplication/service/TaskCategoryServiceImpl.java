@@ -56,4 +56,14 @@ public class TaskCategoryServiceImpl implements TaskCategoryService {
 		return taskCategoryJsons;
 	}
 
+	@Override
+	public void deleteUser(Integer id) {
+		taskCategoryRepository.deleteTaskCategory(id);
+	}
+
+	@Override
+	public void retriveSoftDeletedUserById(Integer id) {
+		taskCategoryRepository.retriveSoftDeletedTaskCategoryById(id);
+	}
+
 }

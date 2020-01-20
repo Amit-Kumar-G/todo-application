@@ -57,7 +57,19 @@ public class TaskController {
 	}
 	
 	@DeleteMapping(value = "/tasks/{id}")
-	public TaskJson deleteTask (@PathVariable Integer id) {
-		return taskService.deleteTask(id);
+	public ResponseEntity<DeletedSuccessfullyJson> deleteTask (@PathVariable Integer id) {
+		taskService.deleteTask(id);
+		DeletedSuccessfullyJson deletedSuccessfullyJson = new DeletedSuccessfullyJson("Deleted successfully.");
+		return new ResponseEntity<DeletedSuccessfullyJson>(deletedSuccessfullyJson, HttpStatus.OK);
+	}
+	
+	@PutMapping("/tasks/{id}/recover")
+	public ResponseEntity<DeletedSuccessfullyJson> retriveSoftDeletedTask(@PathVariable Integer id) {
+		
+		taskService.retriveSoftDeletedTaskById(id);
+
+		// Sending back empty object.
+		DeletedSuccessfullyJson deletedSuccessfullyJson = new DeletedSuccessfullyJson("Recovered succcessfully.");
+		return new ResponseEntity<DeletedSuccessfullyJson>(deletedSuccessfullyJson, HttpStatus.OK);
 	}
 }

@@ -15,5 +15,9 @@ public interface TaskRepository {
 	public Task getTaskById(Integer id);
 
 	public List<Task> findAll();
+
+	void deleteTask(Integer id);
+
+	void retriveSoftDeletedTaskById(Integer id);
 	
 }

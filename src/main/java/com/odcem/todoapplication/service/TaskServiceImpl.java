@@ -91,10 +91,13 @@ public class TaskServiceImpl implements TaskService{
 	@Override
 	public TaskJson deleteTask(Integer id) {
 		
-		/*
-		 * TODO: Soft deleting
-		 */
+		taskRepository.deleteTask(id);
 		return null;
+	}
+
+	@Override
+	public void retriveSoftDeletedTaskById(Integer id) {		
+		taskRepository.retriveSoftDeletedTaskById(id);
 	}
 
 }

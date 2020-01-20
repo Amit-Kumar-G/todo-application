@@ -23,10 +23,10 @@ public interface UserJpaRepository<T extends User, ID extends Integer> extends J
 	@Query("select u from User u where u.id = :id and u.isDeleted = :isDeleted")
 	public User findUserById(@Param("id") Integer id, @Param("isDeleted") Boolean isDeleted);
 	
-	@Query("select COUNT(t) from Task t WHERE t.user = :user")
+	@Query("select COUNT(t) from Task t WHERE t.user = :user and t.isDeleted=false")
 	public Integer getNumberOfUserTasks(@Param("user") User user);
 	
-	@Query("select COUNT(t) from TaskCategory t WHERE t.user = :user")
+	@Query("select COUNT(t) from TaskCategory t WHERE t.user = :user and t.isDeleted=false")
 	public Integer getNumberOfUserTaskCategories(@Param("user") User user);
 	
 	@Transactional

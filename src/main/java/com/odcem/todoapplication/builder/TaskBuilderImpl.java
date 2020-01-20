@@ -44,7 +44,7 @@ public class TaskBuilderImpl implements TaskBuilder{
 		
 		TaskCategory taskCat = null;
 		if (taskJson.getCategoryId() != null) {
-			taskCat = taskCategoryRepository.getOne(taskJson.getCategoryId());
+			taskCat = taskCategoryRepository.findTaskCategoryById(taskJson.getCategoryId(), false);
 		}
 		
 		Task task = new Task(

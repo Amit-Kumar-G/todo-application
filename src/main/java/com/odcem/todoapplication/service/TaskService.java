@@ -16,4 +16,6 @@ public interface TaskService {
 	public TaskJson updateTask (TaskJson taskJson, int id);
 	
 	public TaskJson deleteTask(Integer id);
+
+	public void retriveSoftDeletedTaskById(Integer id);
 }
