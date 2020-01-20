@@ -32,6 +32,13 @@ public class TaskCategory {
 	@Column(name = "is_deleted")
 	private Boolean isDeleted;
 	
+	@OneToMany(mappedBy = "taskCategory", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Task> tasks;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
+	
 	public User getUser() {
 		return user;
 	}
@@ -40,12 +47,6 @@ public class TaskCategory {
 		this.user = user;
 	}
 
-	@OneToMany(mappedBy = "taskCategory", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Task> tasks;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private User user;
 	
 	public TaskCategory() {}
 	

@@ -1,5 +1,7 @@
 package com.odcem.todoapplication.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -36,5 +38,10 @@ public class TaskCategoryRepositoryImpl implements TaskCategoryRepository {
 			throw new TaskCategoryValidationException("The task category with the given id does not exist.");
 		}
 		return taskCategory;
+	}
+
+	@Override
+	public List<TaskCategory> getAllUsers() {
+		return taskCategoryJpaRepository.findAll();
 	}
 }

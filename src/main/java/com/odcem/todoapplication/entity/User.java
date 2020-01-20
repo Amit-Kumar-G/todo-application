@@ -36,6 +36,14 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<TaskCategory> taskCategories;
 
+	public Set<TaskCategory> getTaskCategories() {
+		return taskCategories;
+	}
+
+	public void setTaskCategories(Set<TaskCategory> taskCategories) {
+		this.taskCategories = taskCategories;
+	}
+
 	public Integer getId() {
 		return id;
 	}

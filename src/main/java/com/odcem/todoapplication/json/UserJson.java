@@ -14,4 +14,6 @@ public class UserJson {
 	private String email;
 	
 	private List<TaskJson> taskJsonList;
+	
+	private List<String> taskCategoryNames;
 }

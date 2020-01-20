@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ErrorDetial {
+public class ErrorDetialJson {
 	
 	private String errorSubCode;
 	private String errorDescription;
@@ -20,7 +20,7 @@ public class ErrorDetial {
 	/**
 	 * @see Used for errors without any description provided
 	 */
-	public ErrorDetial(String errorSubCode, String errorDescription) {
+	public ErrorDetialJson(String errorSubCode, String errorDescription) {
 		this.errorSubCode = errorSubCode;
 		this.errorDescription = errorDescription;
 		this.message = "Contact support with the error code " + errorSubCode + ". Occoured at: " + (new Date());

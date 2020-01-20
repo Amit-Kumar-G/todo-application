@@ -1,5 +1,7 @@
 package com.odcem.todoapplication.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +27,20 @@ public class TaskCategoryController {
 	private TaskCategoryService taskCategoryService;
 	
 	@PostMapping(value = "/taskCategory")
-	public ResponseEntity<TaskCategoryJson> addTask (@RequestBody TaskCategoryJson taskCategoryJson) {
+	public ResponseEntity<TaskCategoryJson> addTaskCategory (@RequestBody TaskCategoryJson taskCategoryJson) {
 		TaskCategoryJson responseJson = taskCategoryService.addTaskCategory(taskCategoryJson);
 		return new ResponseEntity<TaskCategoryJson>(responseJson, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/taskCategory/{id}")
-	public ResponseEntity<TaskCategoryJson> getUser (@PathVariable Integer id) {
+	public ResponseEntity<TaskCategoryJson> getTaskCategory (@PathVariable Integer id) {
 		TaskCategoryJson responseJson = taskCategoryService.getTaskById(id);
 		return new ResponseEntity<TaskCategoryJson>(responseJson, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/taskCategory")
+	public ResponseEntity<List<TaskCategoryJson>> getAllTasks () {
+		List<TaskCategoryJson> responseJson = taskCategoryService.getAllTasks();
+		return new ResponseEntity<List<TaskCategoryJson>>(responseJson, HttpStatus.OK);
 	}
 }

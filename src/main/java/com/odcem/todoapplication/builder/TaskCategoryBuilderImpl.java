@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.odcem.todoapplication.entity.Task;
 import com.odcem.todoapplication.entity.TaskCategory;
+import com.odcem.todoapplication.entity.User;
+import com.odcem.todoapplication.exception.TaskCategoryValidationException;
+import com.odcem.todoapplication.exception.UserValidationException;
 import com.odcem.todoapplication.json.TaskCategoryJson;
 import com.odcem.todoapplication.json.TaskJson;
 import com.odcem.todoapplication.repository.UserRepository;
@@ -32,7 +35,9 @@ public class TaskCategoryBuilderImpl implements TaskCategoryBuilder{
 		
 		TaskCategory taskCategory = new TaskCategory();
 		taskCategory.setName(taskCategoryJson.getName());
-		taskCategory.setUser(userRepository.getUserById(taskCategoryJson.getUserId()));
+		User user = userRepository.getUserById(taskCategoryJson.getUserId());
+		fetchAndCheckUser(user);			
+		taskCategory.setUser(user);
 		taskCategory.setIsDeleted(false);
 		return taskCategory;
 	}
@@ -56,5 +61,14 @@ public class TaskCategoryBuilderImpl implements TaskCategoryBuilder{
 		
 		taskCategoryJson.setTasks(taskJsons);
 		return taskCategoryJson;
+	}
+	
+	private void fetchAndCheckUser(User user) {
+		
+		try {
+			System.out.println(user.getId());
+		} catch (Exception e) {
+			throw new UserValidationException("The given user ID could not be found.");
+		}
 	}
 }
